@@ -1,0 +1,82 @@
+groups:
+  - name: ecommerce_alerts
+    interval: 30s
+    rules:
+      # API Health Alerts
+      - alert: APIDown
+        expr: up{job="backend-api"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "E-commerce API is down"
+          description: "Backend API has been unreachable for 5 minutes"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 5%"
+
+      # Database Alerts
+      - alert: DatabaseDown
+        expr: up{job="mongodb"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "MongoDB database is down"
+
+      - alert: DatabaseConnectionPoolExhausted
+        expr: mongodb_connections_current > 800
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Database connection pool is nearly exhausted"
+
+      # Security Alerts
+      - alert: BruteForceAttempt
+        expr: rate(failed_login_attempts_total[5m]) > 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Possible brute force attack detected"
+          description: "Failed login attempts exceeding threshold"
+
+      - alert: SQLInjectionAttempt
+        expr: increase(sql_injection_attempts_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SQL injection attempt detected"
+
+      # Resource Alerts
+      - alert: HighCPUUsage
+        expr: container_cpu_usage_seconds_total > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+
+      - alert: HighMemoryUsage
+        expr: container_memory_usage_bytes / container_spec_memory_limit_bytes > 0.85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disk space running low"

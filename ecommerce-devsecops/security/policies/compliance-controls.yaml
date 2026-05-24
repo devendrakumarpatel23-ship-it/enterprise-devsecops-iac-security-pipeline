@@ -1,0 +1,153 @@
+name: pci-dss
+description: "PCI-DSS 3.2.1 Compliance Checks"
+
+controls:
+  1.1:
+    description: "Firewall configuration standards"
+    severity: high
+    categories: [network, access]
+  
+  2.2:
+    description: "Change default credentials"
+    severity: critical
+    categories: [authentication, defaults]
+  
+  2.4:
+    description: "Limit access to unnecessary services"
+    severity: high
+    categories: [network, access]
+  
+  3.2:
+    description: "Encrypt sensitive data in transit"
+    severity: critical
+    categories: [encryption, data-protection]
+  
+  3.4:
+    description: "Use strong cryptography"
+    severity: high
+    categories: [encryption, cryptography]
+  
+  6.2:
+    description: "Security patches and updates"
+    severity: high
+    categories: [patching, maintenance]
+  
+  6.5:
+    description: "Common weaknesses addressed"
+    severity: critical
+    categories: [secure-coding]
+  
+  7.1:
+    description: "Limit access by business need"
+    severity: high
+    categories: [access-control]
+  
+  8.2:
+    description: "Strong authentication methods"
+    severity: critical
+    categories: [authentication, mfa]
+  
+  10.2:
+    description: "Implement automated audit trails"
+    severity: high
+    categories: [logging, audit]
+
+---
+name: owasp-top-10
+description: "OWASP Top 10 2021"
+
+controls:
+  A01:2021:
+    title: "Broken Access Control"
+    severity: critical
+    categories: [access-control]
+  
+  A02:2021:
+    title: "Cryptographic Failures"
+    severity: critical
+    categories: [encryption, cryptography]
+  
+  A03:2021:
+    title: "Injection"
+    severity: critical
+    categories: [injection, input-validation]
+  
+  A04:2021:
+    title: "Insecure Design"
+    severity: high
+    categories: [design, security-architecture]
+  
+  A05:2021:
+    title: "Security Misconfiguration"
+    severity: high
+    categories: [configuration, hardening]
+  
+  A06:2021:
+    title: "Vulnerable and Outdated Components"
+    severity: high
+    categories: [dependencies, patching]
+  
+  A07:2021:
+    title: "Authentication Failures"
+    severity: critical
+    categories: [authentication, session-management]
+  
+  A08:2021:
+    title: "Software and Data Integrity Failures"
+    severity: high
+    categories: [integrity, supply-chain]
+  
+  A09:2021:
+    title: "Logging and Monitoring Failures"
+    severity: medium
+    categories: [logging, monitoring]
+  
+  A10:2021:
+    title: "Server-Side Request Forgery"
+    severity: high
+    categories: [ssrf, input-validation]
+
+---
+name: cis-benchmarks
+description: "CIS Critical Security Controls"
+
+controls:
+  CSC1:
+    title: "Inventory and Control of Hardware Assets"
+    severity: high
+  
+  CSC2:
+    title: "Inventory and Control of Software Assets"
+    severity: high
+  
+  CSC3:
+    title: "Data Protection"
+    severity: critical
+  
+  CSC4:
+    title: "Secure Configuration Management"
+    severity: high
+  
+  CSC5:
+    title: "Access Control Management"
+    severity: critical
+  
+  CSC6:
+    title: "Incident Response Management"
+    severity: high
+  
+  CSC7:
+    title: "Email and Web Browser Protections"
+    severity: medium
+  
+  CSC8:
+    title: "Malware Defenses"
+    severity: high
+  
+  CSC9:
+    title: "Limitation and Control of Network Ports"
+    severity: high
+  
+  CSC10:
+    title: "Data Recovery Capabilities"
+    severity: high

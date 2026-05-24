@@ -1,0 +1,13 @@
+http.host: "0.0.0.0"
+http.port: 5601
+
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+
+# Security settings
+xpack.security.enabled: false
+
+# Saved objects settings
+kibana.defaultAppId: "discover"
+
+# Logging
+logging.level: info

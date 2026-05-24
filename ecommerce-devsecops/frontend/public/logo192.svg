@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="192" height="192" fill="url(#grad1)" rx="40"/>
+  
+  <!-- Shopping Cart Icon (larger) -->
+  <g fill="white" transform="translate(48, 48)">
+    <!-- Cart body -->
+    <path d="M 48 96 L 42 60 L 150 60 L 144 96 Q 144 108 135 108 L 57 108 Q 48 108 48 96 Z" stroke="white" stroke-width="4" fill="none"/>
+    
+    <!-- Cart handle -->
+    <path d="M 60 60 Q 60 30 96 30 Q 132 30 132 60" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Items in cart -->
+    <circle cx="72" cy="78" r="6" fill="white"/>
+    <circle cx="96" cy="78" r="6" fill="white"/>
+    <circle cx="120" cy="78" r="6" fill="white"/>
+  </g>
+  
+  <!-- Checkmark for security -->
+  <g transform="translate(132, 132)">
+    <circle cx="0" cy="0" r="24" fill="#10b981" stroke="white" stroke-width="2"/>
+    <path d="M -9 0 L -3 6 L 9 -6" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

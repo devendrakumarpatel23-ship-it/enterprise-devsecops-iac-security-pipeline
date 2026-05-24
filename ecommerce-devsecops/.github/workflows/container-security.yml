@@ -1,0 +1,119 @@
+name: Container Security & Build
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  REGISTRY: ghcr.io
+  BACKEND_IMAGE: ecommerce-backend
+  FRONTEND_IMAGE: ecommerce-frontend
+
+jobs:
+  build-backend:
+    name: Build & Scan Backend
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backend
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          push: false
+          outputs: type=docker,dest=/tmp/backend-image.tar
+      
+      - name: Load image
+        run: |
+          docker load --input /tmp/backend-image.tar
+      
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          input: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy Results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: trivy-backend
+      
+      - name: Login to GitHub Container Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Push to Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.BACKEND_IMAGE }}:latest
+  
+  build-frontend:
+    name: Build & Scan Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      
+      - name: Build
+        working-directory: ./frontend
+        run: npm run build
+      
+      - name: Security Check
+        working-directory: ./frontend
+        run: npm audit --production || true
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          push: false
+          outputs: type=docker,dest=/tmp/frontend-image.tar
+      
+      - name: Load image
+        run: |
+          docker load --input /tmp/frontend-image.tar
+      
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          input: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy Results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: trivy-frontend

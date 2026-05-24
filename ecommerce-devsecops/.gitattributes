@@ -1,0 +1,112 @@
+# Git attributes configuration
+# Ensures consistent handling of files across different systems
+
+# Auto detect text files and normalize line endings to LF
+* text=auto
+
+# Python files
+*.py text eol=lf diff=python
+*.pyw text eol=lf diff=python
+*.pyx text eol=lf diff=python
+
+# JavaScript/TypeScript files
+*.js text eol=lf diff=javascript
+*.jsx text eol=lf diff=javascript
+*.ts text eol=lf diff=typescript
+*.tsx text eol=lf diff=typescript
+*.json text eol=lf
+*.jsonc text eol=lf
+
+# Shell scripts
+*.sh text eol=lf diff=shell
+*.bash text eol=lf diff=shell
+*.zsh text eol=lf diff=shell
+
+# YAML files
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Markdown files
+*.md text eol=lf diff=markdown
+*.markdown text eol=lf diff=markdown
+
+# Docker
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+
+# Terraform
+*.tf text eol=lf
+*.tfvars text eol=lf
+
+# HTML/CSS
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.sass text eol=lf
+
+# Configuration files
+*.conf text eol=lf
+*.config text eol=lf
+*.env text eol=lf
+*.ini text eol=lf
+*.toml text eol=lf
+
+# Binary files (don't modify)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.jar binary
+*.exe binary
+*.dll binary
+
+# Fonts
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# Security files (should never be text-diffed)
+*.key binary
+*.pem binary
+*.pfx binary
+*.p12 binary
+
+# Lock files
+package-lock.json text merge=union
+yarn.lock text merge=union
+poetry.lock text merge=union
+
+# Test coverage
+.coverage binary
+*.coverage binary
+coverage.xml text
+htmlcov/** binary
+
+# Build artifacts
+dist/** binary
+build/** binary
+*.pyc binary
+*.pyo binary
+*.egg-info/** binary
+node_modules/** binary
+__pycache__/** binary
+.pytest_cache/** binary
+
+# IDE files
+.vscode/** binary
+.idea/** binary
+*.swp binary
+*.swo binary
+
+# OS files
+.DS_Store binary
+Thumbs.db binary
+ehthumbs.db binary

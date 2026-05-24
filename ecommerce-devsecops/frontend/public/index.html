@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Enterprise E-commerce Platform - Secure Shopping Experience"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>E-Commerce Platform | Enterprise Security</title>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' http://localhost:5000 https://api.example.com;" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="E-Commerce Platform | Enterprise Security" />
+    <meta property="og:description" content="Secure online shopping with enterprise-grade security" />
+    <meta property="og:url" content="https://ecommerce.example.com" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Preconnect to API -->
+    <link rel="preconnect" href="http://localhost:5000" />
+    <link rel="dns-prefetch" href="http://localhost:5000" />
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html, body, #root {
+        width: 100%;
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #fafafa;
+        color: #333;
+      }
+      
+      body {
+        margin: 0;
+        font-family: inherit;
+      }
+      
+      #root {
+        display: flex;
+      }
+      
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+          monospace;
+      }
+      
+      /* Loading spinner */
+      .app-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      
+      .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid white;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        color: white;
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      ">
+        <div style="text-align: center; padding: 40px;">
+          <h1 style="color: #333; margin-bottom: 20px;">⚠️ JavaScript Required</h1>
+          <p style="color: #666; font-size: 16px;">
+            This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings.
+          </p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root">
+      <div class="app-loading">
+        <div>
+          <div class="spinner"></div>
+          <div class="loading-text">Loading E-Commerce Platform...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Monitoring -->
+    <script>
+      // Mark page load start
+      if (window.performance && window.performance.mark) {
+        window.performance.mark('app-start');
+      }
+      
+      // Log performance metrics on page load
+      window.addEventListener('load', function() {
+        if (window.performance && window.performance.mark && window.performance.measure) {
+          window.performance.mark('app-end');
+          window.performance.measure('app-load', 'app-start', 'app-end');
+          
+          const measure = window.performance.getEntriesByName('app-load')[0];
+          if (measure) {
+            console.log('App Load Time:', measure.duration.toFixed(2), 'ms');
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

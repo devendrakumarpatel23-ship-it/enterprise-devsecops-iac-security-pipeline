@@ -1,0 +1,64 @@
+{
+  "name": "ecommerce-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise E-commerce Frontend with Security",
+  "author": "DevSecOps Team",
+  "license": "Proprietary",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "axios": "^1.5.0",
+    "redux": "^4.2.1",
+    "react-redux": "^8.1.3",
+    "@reduxjs/toolkit": "^1.9.7",
+    "material-ui": "^4.12.4",
+    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.14.0",
+    "react-hook-form": "^7.47.0",
+    "lodash": "^4.17.21",
+    "crypto-js": "^4.1.1",
+    "jwt-decode": "^3.1.2",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-security": "^1.7.1",
+    "prettier": "^3.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md}'",
+    "security:check": "npm audit --production"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:security/recommended"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "/"
+}

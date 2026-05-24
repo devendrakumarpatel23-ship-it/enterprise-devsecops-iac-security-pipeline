@@ -1,0 +1,32 @@
+# meta robots configuration for web.config (IIS)
+
+# For Apache users, add these headers to .htaccess:
+# Header set X-Robots-Tag "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+
+# For Nginx, add to server block:
+# add_header X-Robots-Tag "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
+
+# This file documents the robots directives for the E-Commerce Platform
+
+## Public Pages (should be indexed)
+# /              - Homepage (index)
+# /products      - Product listing (follow)
+# /products/:id  - Product details (index)
+# /about         - About page (index)
+# /contact       - Contact page (index)
+
+## Private Pages (should NOT be indexed)
+# /login         - noindex
+# /register      - noindex
+# /profile       - noindex, nofollow
+# /orders        - noindex, nofollow
+# /admin         - noindex, nofollow
+# /api/*         - noindex, nofollow
+# /checkout      - noindex, nofollow
+
+## Other Directives
+# X-Robots-Tag: notranslate
+# X-Robots-Tag: unavailable_after:[date]
+# X-Robots-Tag: max-snippet:[number]
+# X-Robots-Tag: max-image-preview:large
+# X-Robots-Tag: max-video-preview:[seconds]

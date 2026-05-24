@@ -1,0 +1,63 @@
+rules:
+  - id: sql-injection
+    patterns:
+      - pattern-either:
+          - pattern: f"... $SQL_VAR ..."
+          - pattern: "... + $SQL_VAR + ..."
+    message: "Potential SQL injection vulnerability"
+    languages: [python]
+    severity: ERROR
+
+  - id: hardcoded-secrets
+    patterns:
+      - pattern-either:
+          - pattern: |
+              $VAR = "password"
+              ...
+          - pattern: |
+              api_key = "..."
+              ...
+    message: "Hardcoded secrets detected"
+    languages: [python, javascript]
+    severity: CRITICAL
+
+  - id: weak-crypto
+    patterns:
+      - pattern-either:
+          - pattern: hashlib.md5(...)
+          - pattern: hashlib.sha1(...)
+    message: "Weak cryptographic algorithm used"
+    languages: [python]
+    severity: WARNING
+
+  - id: insecure-deserialization
+    patterns:
+      - pattern: pickle.loads(...)
+    message: "Insecure deserialization - use safe alternatives"
+    languages: [python]
+    severity: ERROR
+
+  - id: xss-vulnerability
+    patterns:
+      - pattern: dangerouslySetInnerHTML={...}
+    message: "Potential XSS vulnerability"
+    languages: [javascript, typescript]
+    severity: ERROR
+
+  - id: insecure-random
+    patterns:
+      - pattern: random.random()
+    message: "Weak random number generation - use secrets module"
+    languages: [python]
+    severity: WARNING
+
+  - id: missing-input-validation
+    patterns:
+      - pattern: request.args.get($VAR)
+      - pattern-not: |
+          ... 
+          validate($VAR)
+          ...
+    message: "Missing input validation"
+    languages: [python]
+    severity: WARNING

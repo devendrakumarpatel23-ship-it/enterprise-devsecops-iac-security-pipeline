@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#667eea" rx="8"/>
+  
+  <!-- Shopping Cart Icon -->
+  <g fill="white">
+    <!-- Cart body -->
+    <path d="M 16 48 L 14 20 L 50 20 L 48 48 Q 48 51 45 51 L 19 51 Q 16 51 16 48 Z" stroke="white" stroke-width="1.5" fill="none"/>
+    
+    <!-- Cart handle -->
+    <path d="M 20 20 Q 20 10 32 10 Q 44 10 44 20" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Items in cart (circles representing products) -->
+    <circle cx="24" cy="32" r="3" fill="white"/>
+    <circle cx="32" cy="32" r="3" fill="white"/>
+    <circle cx="40" cy="32" r="3" fill="white"/>
+  </g>
+  
+  <!-- Checkmark (security badge) -->
+  <g transform="translate(44, 44)">
+    <circle cx="0" cy="0" r="8" fill="#10b981" stroke="white" stroke-width="1"/>
+    <path d="M -3 0 L -1 2 L 3 -2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

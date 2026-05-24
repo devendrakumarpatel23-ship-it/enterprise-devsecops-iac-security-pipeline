@@ -1,0 +1,58 @@
+# robots.txt for E-Commerce Platform
+# Allow search engine crawlers for public content
+
+# Default rules for all robots
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /user/
+Disallow: /profile/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /orders/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+Disallow: /search?
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+Disallow: /reset-password
+Disallow: /.well-known/
+Disallow: /.env
+
+# Allow specific crawlers
+User-agent: Googlebot
+Allow: /
+Allow: /products/
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Allow: /products/
+Crawl-delay: 2
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://ecommerce.example.com/sitemap.xml
+Sitemap: https://ecommerce.example.com/sitemap-products.xml
+Sitemap: https://ecommerce.example.com/sitemap-pages.xml
+
+# Cache control
+# Crawl-delay: 1
+Request-rate: 1/10s

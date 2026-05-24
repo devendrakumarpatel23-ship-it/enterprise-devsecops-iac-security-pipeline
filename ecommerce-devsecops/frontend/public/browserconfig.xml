@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="favicon.svg"/>
+      <square150x150logo src="logo192.svg"/>
+      <square310x310logo src="logo512.svg"/>
+      <wide310x150logo src="logo512.svg"/>
+      <TileColor>#667eea</TileColor>
+      <TileImage src="favicon.svg"/>
+    </tile>
+    <notification>
+      <polling-uri src="https://ecommerce.example.com/notifications" />
+      <polling-uri2 src="https://ecommerce.example.com/notifications" />
+      <polling-frequency>30</polling-frequency>
+      <cycle>1</cycle>
+    </notification>
+  </msapplication>
+</browserconfig>

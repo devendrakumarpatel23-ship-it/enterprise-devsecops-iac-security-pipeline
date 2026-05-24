@@ -1,0 +1,48 @@
+# CODEOWNERS
+# This file defines which team is responsible for certain parts of the codebase
+
+# Default owners
+* @devops-team
+
+# Backend
+backend/ @backend-team @devops-team
+backend/app/middleware/ @backend-team @security-team
+backend/app/security/ @backend-team @security-team
+backend/tests/ @backend-team
+
+# Frontend
+frontend/ @frontend-team @devops-team
+frontend/src/ @frontend-team
+
+# Infrastructure
+infrastructure/ @devops-team @security-team
+infrastructure/terraform/ @devops-team @infra-team
+
+# Security
+security/ @security-team @devops-team
+security/ai-scoring/ @ml-team @security-team
+
+# Monitoring
+monitoring/ @devops-team @devops-team
+
+# Documentation
+docs/ @devops-team @tech-writer
+docs/SECURITY.md @security-team
+docs/DEPLOYMENT.md @devops-team
+
+# CI/CD
+.github/workflows/ @devops-team
+.github/PULL_REQUEST_TEMPLATE.md @devops-team
+
+# Docker
+docker-compose.yml @devops-team
+backend/Dockerfile @devops-team
+frontend/Dockerfile @devops-team
+
+# Dependencies
+backend/requirements.txt @backend-team
+frontend/package.json @frontend-team
+
+# Configuration
+.github/ @devops-team
+scripts/ @devops-team

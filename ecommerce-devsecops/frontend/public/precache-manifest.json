@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2024-05-21T00:00:00Z",
+  "precacheEntries": [
+    {
+      "url": "/index.html",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/manifest.json",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/favicon.svg",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/logo192.svg",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/logo512.svg",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/robots.txt",
+      "revision": "1.0.0"
+    },
+    {
+      "url": "/sitemap.xml",
+      "revision": "1.0.0"
+    }
+  ],
+  "runtimeEntries": [
+    {
+      "url": "/api/products",
+      "revision": "dynamic"
+    },
+    {
+      "url": "/api/orders",
+      "revision": "dynamic"
+    },
+    {
+      "url": "/api/users",
+      "revision": "dynamic"
+    }
+  ]
+}
