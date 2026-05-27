@@ -1,0 +1,249 @@
+{
+  "attack_logs": [
+    {
+      "timestamp": "2026-05-27T14:23:45Z",
+      "log_type": "WAF",
+      "event_id": "EVT001",
+      "severity": "CRITICAL",
+      "source_ip": "192.168.1.100",
+      "destination_ip": "10.0.1.50",
+      "message": "SQL Injection attempt detected in parameter 'id'",
+      "attack_type": "SQL_INJECTION",
+      "payload": "' OR '1'='1",
+      "blocked": true,
+      "response_time_ms": 45
+    },
+    {
+      "timestamp": "2026-05-27T14:24:12Z",
+      "log_type": "IDS",
+      "event_id": "EVT002",
+      "severity": "HIGH",
+      "source_ip": "203.0.113.45",
+      "destination_ip": "10.0.1.20",
+      "message": "Brute force login attempt detected",
+      "attack_type": "BRUTE_FORCE",
+      "failed_attempts": 127,
+      "target_account": "admin",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:25:33Z",
+      "log_type": "WAF",
+      "event_id": "EVT003",
+      "severity": "HIGH",
+      "source_ip": "198.51.100.78",
+      "destination_ip": "10.0.1.50",
+      "message": "XSS attack payload detected",
+      "attack_type": "XSS_ATTACK",
+      "payload": "<script>alert('xss')</script>",
+      "endpoint": "/api/users/search",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:26:15Z",
+      "log_type": "SIEM",
+      "event_id": "EVT004",
+      "severity": "CRITICAL",
+      "source_ip": "10.0.0.50",
+      "destination_ip": "10.0.3.10",
+      "message": "Unauthorized container escape attempt detected",
+      "attack_type": "CONTAINER_ESCAPE",
+      "container_id": "abc123def456",
+      "syscall": "clone",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:27:42Z",
+      "log_type": "EDR",
+      "event_id": "EVT005",
+      "severity": "CRITICAL",
+      "source_ip": "10.0.2.30",
+      "destination_ip": "10.0.1.100",
+      "message": "Lateral movement detected - suspicious SMB activity",
+      "attack_type": "LATERAL_MOVEMENT",
+      "source_host": "WORKSTATION-01",
+      "target_host": "SERVER-02",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:28:11Z",
+      "log_type": "FIREWALL",
+      "event_id": "EVT006",
+      "severity": "HIGH",
+      "source_ip": "203.0.113.99",
+      "destination_ip": "10.0.0.0/8",
+      "message": "Port scanning activity detected",
+      "attack_type": "PORT_SCANNING",
+      "ports_scanned": "1-65535",
+      "packets_detected": 5432,
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:29:33Z",
+      "log_type": "SIEM",
+      "event_id": "EVT007",
+      "severity": "CRITICAL",
+      "source_ip": "unknown",
+      "destination_ip": "10.0.1.50",
+      "message": "Ransomware signature matched - WannaCry variant",
+      "attack_type": "RANSOMWARE",
+      "signature": "Trojan.Ransom.WannaCry.Gen",
+      "process_name": "svchost.exe",
+      "blocked": true,
+      "quarantined": true
+    },
+    {
+      "timestamp": "2026-05-27T14:30:45Z",
+      "log_type": "WAF",
+      "event_id": "EVT008",
+      "severity": "HIGH",
+      "source_ip": "192.168.1.55",
+      "destination_ip": "10.0.1.50",
+      "message": "Command injection attempt detected",
+      "attack_type": "COMMAND_INJECTION",
+      "payload": "; ls -la;",
+      "parameter": "search",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:31:22Z",
+      "log_type": "EDR",
+      "event_id": "EVT009",
+      "severity": "MEDIUM",
+      "source_ip": "10.0.2.45",
+      "destination_ip": "8.8.8.8",
+      "message": "Suspicious DNS query detected",
+      "attack_type": "C2_COMMUNICATION",
+      "domain": "malicious-c2-server.net",
+      "query_type": "A",
+      "blocked": true
+    },
+    {
+      "timestamp": "2026-05-27T14:32:11Z",
+      "log_type": "SIEM",
+      "event_id": "EVT010",
+      "severity": "HIGH",
+      "source_ip": "10.0.1.75",
+      "destination_ip": "10.0.3.200",
+      "message": "Privilege escalation attempt detected",
+      "attack_type": "PRIVILEGE_ESCALATION",
+      "user": "regular_user",
+      "target_privilege": "root",
+      "method": "sudo exploitation",
+      "blocked": true
+    }
+  ],
+  "threat_actors": [
+    {
+      "id": "APT-28",
+      "name": "Fancy Bear / APT-28",
+      "country": "Russia",
+      "first_seen": "2007",
+      "last_seen": "2026-05-27",
+      "sophistication": 0.95,
+      "known_campaigns": ["Midnight Rose", "Shiny Bear"],
+      "capabilities": ["Spear-phishing", "Zero-day exploitation", "Advanced C2"],
+      "targets": ["Government", "Defense", "Energy"]
+    },
+    {
+      "id": "FIN7",
+      "name": "FIN7",
+      "country": "Unknown (Eastern Europe)",
+      "first_seen": "2013",
+      "last_seen": "2026-05-27",
+      "sophistication": 0.90,
+      "known_campaigns": ["Carbanak", "FIN7 Jssloader"],
+      "capabilities": ["POS malware", "Ransomware", "Data theft"],
+      "targets": ["Financial", "Retail", "Hospitality"]
+    },
+    {
+      "id": "Lazarus",
+      "name": "Lazarus Group",
+      "country": "North Korea",
+      "first_seen": "2009",
+      "last_seen": "2026-05-27",
+      "sophistication": 0.92,
+      "known_campaigns": ["Sony Pictures", "Bangladesh Bank Heist"],
+      "capabilities": ["Supply chain attacks", "Cryptocurrency theft"],
+      "targets": ["Financial", "Entertainment", "Cryptocurrency"]
+    }
+  ],
+  "incident_scenarios": [
+    {
+      "scenario_id": "INC001",
+      "name": "Multi-stage SQL Injection Campaign",
+      "description": "Attacker exploits SQL injection vulnerability to steal customer database",
+      "attack_chain": [
+        "SQL injection probe",
+        "Database enumeration",
+        "Credential extraction",
+        "Privilege escalation",
+        "Data exfiltration"
+      ],
+      "estimated_impact": "$500,000",
+      "ttps": ["T1190", "T1046", "T1583"]
+    },
+    {
+      "scenario_id": "INC002",
+      "name": "Container Infrastructure Compromise",
+      "description": "Attacker gains access to Kubernetes cluster and attempts container escape",
+      "attack_chain": [
+        "Vulnerable container application",
+        "Container privilege escalation",
+        "Container escape",
+        "Host system compromise",
+        "Persistence establishment"
+      ],
+      "estimated_impact": "$1,000,000",
+      "ttps": ["T1611", "T1548", "T1098"]
+    },
+    {
+      "scenario_id": "INC003",
+      "name": "Ransomware Deployment Campaign",
+      "description": "Organized group deploys ransomware after initial access and persistence",
+      "attack_chain": [
+        "Phishing email delivery",
+        "Malware execution",
+        "Persistence mechanisms",
+        "Lateral movement",
+        "Ransomware deployment"
+      ],
+      "estimated_impact": "$2,000,000",
+      "ttps": ["T1566", "T1486", "T1531"]
+    }
+  ],
+  "ioc_feeds": [
+    {
+      "type": "ip",
+      "value": "192.168.1.100",
+      "severity": "HIGH",
+      "source": "Internal Detection",
+      "last_seen": "2026-05-27T14:23:45Z",
+      "context": "SQL injection attempt source"
+    },
+    {
+      "type": "domain",
+      "value": "malicious-c2-server.net",
+      "severity": "CRITICAL",
+      "source": "Threat Intelligence Feed",
+      "last_seen": "2026-05-27T14:31:22Z",
+      "context": "Known C2 command and control server"
+    },
+    {
+      "type": "file_hash",
+      "value": "d41d8cd98f00b204e9800998ecf8427e",
+      "severity": "CRITICAL",
+      "source": "Malware Database",
+      "last_seen": "2026-05-27",
+      "context": "WannaCry ransomware variant"
+    },
+    {
+      "type": "process",
+      "value": "svchost.exe",
+      "severity": "MEDIUM",
+      "source": "EDR Detection",
+      "last_seen": "2026-05-27T14:30:45Z",
+      "context": "Ransomware process detection"
+    }
+  ]
+}

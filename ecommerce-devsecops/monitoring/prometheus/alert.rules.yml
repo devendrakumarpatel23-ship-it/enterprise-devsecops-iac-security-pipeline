@@ -48,6 +48,109 @@ groups:
           summary: "Possible brute force attack detected"
           description: "Failed login attempts exceeding threshold"
 
+  - name: SecurityAlerts
+    interval: 30s
+    rules:
+      - alert: CriticalVulnerabilityDetected
+        expr: vulnerabilities{severity='critical'} > 0
+        for: 5m
+        labels:
+          severity: critical
+          team: security
+        annotations:
+          summary: "Critical vulnerability detected"
+          description: "A critical security vulnerability has been identified: {{ $labels.cve_id }}"
+
+      - alert: HighFailedAuthenticationAttempts
+        expr: rate(auth_failures_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: high
+          team: security
+        annotations:
+          summary: "High rate of failed authentication attempts"
+          description: "Failed authentication rate: {{ $value }} attempts/sec"
+
+      - alert: UnauthorizedAPIAccess
+        expr: rate(unauthorized_api_calls_total[5m]) > 5
+        for: 2m
+        labels:
+          severity: critical
+          team: security
+        annotations:
+          summary: "Unauthorized API access detected"
+          description: "Unauthorized API calls from {{ $labels.source_ip }}"
+
+      - alert: DataExfiltrationAttempt
+        expr: network_egress_bytes_total > 1073741824
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+        annotations:
+          summary: "Potential data exfiltration detected"
+          description: "Large data transfer to external IP: {{ $labels.destination_ip }}"
+
+      - alert: PrivilegeEscalationAttempt
+        expr: privilege_escalation_attempts_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+        annotations:
+          summary: "Privilege escalation attempt detected"
+          description: "User {{ $labels.user }} attempted privilege escalation"
+
+      - alert: ContainerEscapeAttempt
+        expr: container_escape_attempts_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: container-security
+        annotations:
+          summary: "Container escape attempt detected"
+          description: "Container {{ $labels.container_id }} attempted escape"
+
+      - alert: MalwareDetected
+        expr: malware_detections_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+        annotations:
+          summary: "Malware signature detected"
+          description: "Malware {{ $labels.malware_name }} detected at {{ $labels.file_path }}"
+
+      - alert: ComplianceDrift
+        expr: compliance_score < 80
+        for: 15m
+        labels:
+          severity: high
+          team: compliance
+        annotations:
+          summary: "Compliance score below threshold"
+          description: "{{ $labels.framework }} compliance score: {{ $value }}%"
+
+      - alert: SecurityPatchPending
+        expr: pending_security_patches > 0
+        for: 24h
+        labels:
+          severity: high
+          team: infrastructure
+        annotations:
+          summary: "Security patches pending"
+          description: "{{ $value }} critical security patches pending on {{ $labels.host }}"
+
+      - alert: SSLCertificateExpiring
+        expr: ssl_cert_days_until_expiry < 30
+        for: 1h
+        labels:
+          severity: high
+          team: infrastructure
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "Certificate {{ $labels.domain }} expires in {{ $value }} days"
+
       - alert: SQLInjectionAttempt
         expr: increase(sql_injection_attempts_total[5m]) > 0
         for: 1m

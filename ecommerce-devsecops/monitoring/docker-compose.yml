@@ -1,0 +1,159 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.40.0
+    container_name: prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libs'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alert.rules.yml:/etc/prometheus/rules.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager:v0.24.0
+    container_name: alertmanager
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager-data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+    ports:
+      - "9093:9093"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:9.2.0
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=SecurePassword123!
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-clock-panel
+      - GF_SECURITY_ALLOW_EMBED_FRAMES=true
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+
+  node-exporter:
+    image: prom/node-exporter:v1.4.0
+    container_name: node-exporter
+    restart: unless-stopped
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    ports:
+      - "9100:9100"
+    networks:
+      - monitoring
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.0
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - monitoring
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - monitoring
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    container_name: kibana
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - monitoring
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.9
+    container_name: logstash
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/elk/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./monitoring/elk/logstash/config:/usr/share/logstash/config:ro
+    ports:
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+    networks:
+      - monitoring
+    depends_on:
+      - elasticsearch
+
+  # Security-focused exporters
+  
+  # Process exporter for monitoring process-level metrics
+  processes-exporter:
+    image: ncabatoff/process-exporter:0.7.10
+    container_name: processes-exporter
+    restart: unless-stopped
+    command:
+      - "-procfs=/host/proc"
+    volumes:
+      - /proc:/host/proc:ro
+    ports:
+      - "9256:9256"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
+  alertmanager-data:
+  elasticsearch-data:

@@ -1,0 +1,308 @@
+{
+  "report_generated": "2026-05-25T10:59:26.275808",
+  "organizational_risk": {
+    "organizational_risk_score": 2.75,
+    "threat_level": "LOW",
+    "critical_vulnerabilities": 5,
+    "high_vulnerabilities": 0,
+    "average_vulnerability_risk": 100.0,
+    "total_vulnerabilities": 5
+  },
+  "vulnerabilities": [
+    {
+      "cve_id": "CVE-2024-1234",
+      "cvss_score": 9.8,
+      "risk_score": 100,
+      "priority": "CRITICAL",
+      "exploitability": "HIGH",
+      "exposure": "PUBLIC",
+      "asset_sensitivity": "CRITICAL",
+      "description": "Remote Code Execution in authentication module. Public exploits available.",
+      "affected_systems": [
+        "api-server-01",
+        "api-server-02",
+        "api-server-03"
+      ],
+      "mitre_techniques": [
+        "T1190",
+        "T1203"
+      ],
+      "discovered_date": "2026-05-25T10:59:26.273630",
+      "attack_prediction": {
+        "vulnerability": "CVE-2024-1234",
+        "attack_likelihood_30_days": 1.0,
+        "confidence": "high",
+        "factors": {
+          "base_risk_score": 100,
+          "public_exploit": true,
+          "active_exploitation": false
+        }
+      }
+    },
+    {
+      "cve_id": "CVE-2024-5678",
+      "cvss_score": 8.6,
+      "risk_score": 100,
+      "priority": "CRITICAL",
+      "exploitability": "FUNCTIONAL",
+      "exposure": "PUBLIC",
+      "asset_sensitivity": "HIGH",
+      "description": "SQL Injection vulnerability in product search API",
+      "affected_systems": [
+        "web-app-01",
+        "web-app-02"
+      ],
+      "mitre_techniques": [
+        "T1190"
+      ],
+      "discovered_date": "2026-05-25T10:59:26.274488",
+      "attack_prediction": {
+        "vulnerability": "CVE-2024-5678",
+        "attack_likelihood_30_days": 1.0,
+        "confidence": "high",
+        "factors": {
+          "base_risk_score": 100,
+          "public_exploit": false,
+          "active_exploitation": false
+        }
+      }
+    },
+    {
+      "cve_id": "CVE-2024-9012",
+      "cvss_score": 7.5,
+      "risk_score": 100,
+      "priority": "CRITICAL",
+      "exploitability": "PROOF_OF_CONCEPT",
+      "exposure": "PUBLIC",
+      "asset_sensitivity": "HIGH",
+      "description": "XSS vulnerability in user profile pages",
+      "affected_systems": [
+        "web-app-01",
+        "web-app-02",
+        "web-app-03"
+      ],
+      "mitre_techniques": [
+        "T1204"
+      ],
+      "discovered_date": "2026-05-25T10:59:26.274514",
+      "attack_prediction": {
+        "vulnerability": "CVE-2024-9012",
+        "attack_likelihood_30_days": 1.0,
+        "confidence": "high",
+        "factors": {
+          "base_risk_score": 100,
+          "public_exploit": false,
+          "active_exploitation": false
+        }
+      }
+    },
+    {
+      "cve_id": "CVE-2024-3456",
+      "cvss_score": 6.5,
+      "risk_score": 100,
+      "priority": "CRITICAL",
+      "exploitability": "UNPROVEN",
+      "exposure": "ADJACENT_NETWORK",
+      "asset_sensitivity": "MEDIUM",
+      "description": "Weak password policy enforcement",
+      "affected_systems": [
+        "auth-service-01"
+      ],
+      "mitre_techniques": [
+        "T1110"
+      ],
+      "discovered_date": "2026-05-25T10:59:26.274523",
+      "attack_prediction": {
+        "vulnerability": "CVE-2024-3456",
+        "attack_likelihood_30_days": 1.0,
+        "confidence": "high",
+        "factors": {
+          "base_risk_score": 100,
+          "public_exploit": false,
+          "active_exploitation": false
+        }
+      }
+    },
+    {
+      "cve_id": "CVE-2024-7890",
+      "cvss_score": 8.1,
+      "risk_score": 100,
+      "priority": "CRITICAL",
+      "exploitability": "FUNCTIONAL",
+      "exposure": "ADJACENT_NETWORK",
+      "asset_sensitivity": "HIGH",
+      "description": "Privilege escalation via kernel driver",
+      "affected_systems": [
+        "server-01",
+        "server-02"
+      ],
+      "mitre_techniques": [
+        "T1548"
+      ],
+      "discovered_date": "2026-05-25T10:59:26.274535",
+      "attack_prediction": {
+        "vulnerability": "CVE-2024-7890",
+        "attack_likelihood_30_days": 1.0,
+        "confidence": "high",
+        "factors": {
+          "base_risk_score": 100,
+          "public_exploit": false,
+          "active_exploitation": false
+        }
+      }
+    }
+  ],
+  "mitre_mappings": [
+    {
+      "cve_id": "CVE-2024-1234",
+      "mapped_tactics": [
+        "initial_access",
+        "execution"
+      ],
+      "mapped_techniques": [
+        "T1190 - Exploit Public-Facing Application",
+        "T1203 - Exploitation for Client Execution"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-5678",
+      "mapped_tactics": [
+        "initial_access"
+      ],
+      "mapped_techniques": [
+        "T1190 - Exploit Public-Facing Application"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-9012",
+      "mapped_tactics": [
+        "execution"
+      ],
+      "mapped_techniques": [
+        "T1204 - User Execution"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-3456",
+      "mapped_tactics": [
+        "credential_access"
+      ],
+      "mapped_techniques": [
+        "T1110 - Brute Force"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-7890",
+      "mapped_tactics": [
+        "privilege_escalation",
+        "defense_evasion"
+      ],
+      "mapped_techniques": [
+        "T1548 - Abuse Elevation Control Mechanism",
+        "T1548 - Abuse Elevation Control Mechanism"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "cve_id": "CVE-2024-1234",
+      "recommendation": "Immediate patching required for CVE-2024-1234",
+      "severity": "CRITICAL",
+      "estimated_fix_time_minutes": 30,
+      "affected_systems": [
+        "api-server-01",
+        "api-server-02",
+        "api-server-03"
+      ],
+      "steps": [
+        "Backup current configuration",
+        "Apply patch for CVE-2024-1234",
+        "Test in staging environment",
+        "Deploy to production",
+        "Verify remediation"
+      ],
+      "automation_available": true,
+      "risk_if_not_patched": "System compromise possible within 7-30 days"
+    },
+    {
+      "cve_id": "CVE-2024-5678",
+      "recommendation": "Immediate patching required for CVE-2024-5678",
+      "severity": "CRITICAL",
+      "estimated_fix_time_minutes": 30,
+      "affected_systems": [
+        "web-app-01",
+        "web-app-02"
+      ],
+      "steps": [
+        "Backup current configuration",
+        "Apply patch for CVE-2024-5678",
+        "Test in staging environment",
+        "Deploy to production",
+        "Verify remediation"
+      ],
+      "automation_available": true,
+      "risk_if_not_patched": "System compromise possible within 7-30 days"
+    },
+    {
+      "cve_id": "CVE-2024-9012",
+      "recommendation": "Immediate patching required for CVE-2024-9012",
+      "severity": "CRITICAL",
+      "estimated_fix_time_minutes": 30,
+      "affected_systems": [
+        "web-app-01",
+        "web-app-02",
+        "web-app-03"
+      ],
+      "steps": [
+        "Backup current configuration",
+        "Apply patch for CVE-2024-9012",
+        "Test in staging environment",
+        "Deploy to production",
+        "Verify remediation"
+      ],
+      "automation_available": true,
+      "risk_if_not_patched": "System compromise possible within 7-30 days"
+    },
+    {
+      "cve_id": "CVE-2024-3456",
+      "recommendation": "Immediate patching required for CVE-2024-3456",
+      "severity": "CRITICAL",
+      "estimated_fix_time_minutes": 30,
+      "affected_systems": [
+        "auth-service-01"
+      ],
+      "steps": [
+        "Backup current configuration",
+        "Apply patch for CVE-2024-3456",
+        "Test in staging environment",
+        "Deploy to production",
+        "Verify remediation"
+      ],
+      "automation_available": true,
+      "risk_if_not_patched": "System compromise possible within 7-30 days"
+    },
+    {
+      "cve_id": "CVE-2024-7890",
+      "recommendation": "Immediate patching required for CVE-2024-7890",
+      "severity": "CRITICAL",
+      "estimated_fix_time_minutes": 30,
+      "affected_systems": [
+        "server-01",
+        "server-02"
+      ],
+      "steps": [
+        "Backup current configuration",
+        "Apply patch for CVE-2024-7890",
+        "Test in staging environment",
+        "Deploy to production",
+        "Verify remediation"
+      ],
+      "automation_available": true,
+      "risk_if_not_patched": "System compromise possible within 7-30 days"
+    }
+  ],
+  "statistics": {
+    "total_vulnerabilities": 5,
+    "average_risk_score": 100.0
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "dashboard": {
+    "title": "🔒 Enterprise Security Operations Center",
+    "description": "Real-time security monitoring and threat detection dashboard",
+    "timezone": "UTC",
+    "refresh": "5s",
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "rows": [
+      {
+        "title": "Security KPI Metrics",
+        "panels": [
+          {
+            "id": "1",
+            "title": "Security Score",
+            "type": "gauge",
+            "targets": [
+              {
+                "expr": "security_score"
+              }
+            ],
+            "options": {
+              "min": 0,
+              "max": 100,
+              "thresholds": [
+                {"value": 70, "color": "red"},
+                {"value": 85, "color": "yellow"},
+                {"value": 100, "color": "green"}
+              ]
+            }
+          },
+          {
+            "id": "2",
+            "title": "Critical Vulnerabilities",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "count(vulnerabilities{severity='critical'})"
+              }
+            ],
+            "options": {
+              "colorMode": "background",
+              "graphMode": "area"
+            }
+          },
+          {
+            "id": "3",
+            "title": "Open Security Incidents",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "count(security_incidents{status='open'})"
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Compliance Score",
+            "type": "gauge",
+            "targets": [
+              {
+                "expr": "avg(compliance_score)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Threat Intelligence",
+        "panels": [
+          {
+            "id": "5",
+            "title": "Attack Attempts (24h)",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "rate(failed_login_attempts[5m])",
+                "legendFormat": "Failed Logins"
+              },
+              {
+                "expr": "rate(unauthorized_api_access[5m])",
+                "legendFormat": "Unauthorized API Access"
+              },
+              {
+                "expr": "rate(intrusion_attempts[5m])",
+                "legendFormat": "Intrusion Attempts"
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Top Attack Sources",
+            "type": "table",
+            "targets": [
+              {
+                "expr": "topk(10, sum by (source_ip) (attack_attempts))"
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Threat Distribution by Type",
+            "type": "piechart",
+            "targets": [
+              {
+                "expr": "sum by (threat_type) (threat_count)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Vulnerability Analysis",
+        "panels": [
+          {
+            "id": "8",
+            "title": "CVE Trend (30 days)",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "cve_discovered_daily"
+              }
+            ],
+            "options": {
+              "lineInterpolation": "smooth"
+            }
+          },
+          {
+            "id": "9",
+            "title": "Vulnerabilities by Severity",
+            "type": "barchart",
+            "targets": [
+              {
+                "expr": "count by (severity) (vulnerabilities)"
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Mean Time to Remediate (MTTR)",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "avg(remediation_time_hours)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Container & Application Security",
+        "panels": [
+          {
+            "id": "11",
+            "title": "Container Violations",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "container_policy_violations"
+              }
+            ]
+          },
+          {
+            "id": "12",
+            "title": "Runtime Detections",
+            "type": "stat",
+            "targets": [
+                {
+                "expr": "count(runtime_security_events{status='critical'})"
+              }
+            ]
+          },
+          {
+            "id": "13",
+            "title": "Image Scan Failures",
+            "type": "table",
+            "targets": [
+              {
+                "expr": "container_image_scan_failures"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Authentication & Access Control",
+        "panels": [
+          {
+            "id": "14",
+            "title": "Failed Authentication Attempts",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "rate(auth_failures_total[5m])"
+              }
+            ]
+          },
+          {
+            "id": "15",
+            "title": "Privilege Escalation Events",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "count(privilege_escalation_events)"
+              }
+            ]
+          },
+          {
+            "id": "16",
+            "title": "MFA Adoption Rate",
+            "type": "gauge",
+            "targets": [
+              {
+                "expr": "(count(users_with_mfa) / count(total_users)) * 100"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Compliance Monitoring",
+        "panels": [
+          {
+            "id": "17",
+            "title": "Framework Compliance Scores",
+            "type": "barchart",
+            "targets": [
+              {
+                "expr": "compliance_framework_score"
+              }
+            ]
+          },
+          {
+            "id": "18",
+            "title": "Control Status",
+            "type": "table",
+            "targets": [
+              {
+                "expr": "compliance_control_status"
+              }
+            ]
+          },
+          {
+            "id": "19",
+            "title": "Days to Audit",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "days_until_audit"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "System Performance & Health",
+        "panels": [
+          {
+            "id": "20",
+            "title": "CPU Usage by Component",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "rate(process_cpu_seconds_total[5m])"
+              }
+            ]
+          },
+          {
+            "id": "21",
+            "title": "Memory Usage",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "process_resident_memory_bytes / 1024 / 1024"
+              }
+            ]
+          },
+          {
+            "id": "22",
+            "title": "Network I/O",
+            "type": "timeseries",
+            "targets": [
+              {
+                "expr": "rate(network_receive_bytes_total[5m])"
+              },
+              {
+                "expr": "rate(network_transmit_bytes_total[5m])"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

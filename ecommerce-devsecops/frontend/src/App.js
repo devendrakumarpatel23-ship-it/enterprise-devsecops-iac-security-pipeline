@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import OrdersPage from './pages/Orders';
 import Profile from './pages/Profile';
+import SOCDashboard from './pages/SOCDashboard';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/products" replace />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/soc" element={<SOCDashboard />} />
             
             <Route element={<PrivateRoute />}>
               <Route path="/orders" element={<OrdersPage />} />

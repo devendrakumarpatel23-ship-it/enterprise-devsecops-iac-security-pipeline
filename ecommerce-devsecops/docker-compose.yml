@@ -241,12 +241,6 @@ volumes:
   sonarqube_data:
   sonar_db_data:
   elasticsearch_data:
-  mongo_data:
-  redis_data:
-  prometheus_data:
-  grafana_data:
-  sonarqube_data:
-  sonar_db_data:
 
 networks:
   ecommerce-network:

@@ -1,0 +1,246 @@
+{
+  "security_events": [
+    {
+      "event_id": "SEC-EVT-2024-001",
+      "timestamp": "2024-01-15T10:23:45Z",
+      "event_type": "unauthorized_access_attempt",
+      "severity": "high",
+      "source_ip": "192.168.1.100",
+      "target_resource": "/api/admin/users",
+      "user_id": "user_unknown",
+      "status": "blocked",
+      "details": {
+        "attempt_count": 3,
+        "method": "brute_force",
+        "blocked_reason": "Multiple failed auth attempts"
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-002",
+      "timestamp": "2024-01-15T11:45:12Z",
+      "event_type": "privilege_escalation",
+      "severity": "critical",
+      "user_id": "user_456",
+      "escalation_method": "kernel_exploit",
+      "from_privilege": "user",
+      "to_privilege": "root",
+      "status": "detected",
+      "details": {
+        "affected_system": "server-01",
+        "cve_id": "CVE-2024-1234"
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-003",
+      "timestamp": "2024-01-15T13:22:33Z",
+      "event_type": "data_exfiltration",
+      "severity": "critical",
+      "source_system": "database-01",
+      "destination_ip": "198.51.100.20",
+      "data_size_mb": 2500.5,
+      "status": "blocked",
+      "details": {
+        "protocol": "HTTPS",
+        "data_type": "customer_records",
+        "records_count": 15000
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-004",
+      "timestamp": "2024-01-15T14:55:10Z",
+      "event_type": "container_anomaly",
+      "severity": "high",
+      "container_id": "container_abc123",
+      "anomaly_type": "escape_attempt",
+      "status": "contained",
+      "details": {
+        "detection_method": "syscall_monitoring",
+        "syscalls": ["clone", "unshare", "setns"]
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-005",
+      "timestamp": "2024-01-15T15:30:45Z",
+      "event_type": "malware_detection",
+      "severity": "critical",
+      "file_path": "/opt/app/suspicious_binary",
+      "malware_name": "Trojan.Generic.001",
+      "file_hash": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+      "status": "quarantined",
+      "details": {
+        "scanner": "antivirus_system_v2.1",
+        "threat_level": "imminent_risk"
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-006",
+      "timestamp": "2024-01-15T16:12:30Z",
+      "event_type": "intrusion_detection",
+      "severity": "critical",
+      "signature_name": "SQL_INJECTION_ATTEMPT_001",
+      "source_ip": "203.0.113.45",
+      "target_host": "api-server-01",
+      "protocol": "HTTPS",
+      "status": "blocked",
+      "details": {
+        "payload": "'; DROP TABLE users; --",
+        "endpoint": "/api/products/search",
+        "blocked_by": "waf_rule_id_42"
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-007",
+      "timestamp": "2024-01-15T17:08:20Z",
+      "event_type": "policy_violation",
+      "severity": "medium",
+      "policy_id": "POL-001",
+      "policy_name": "Encryption at Rest",
+      "resource_id": "temp_storage_bucket",
+      "status": "flagged",
+      "details": {
+        "violation": "Data stored without encryption",
+        "risk_level": "medium",
+        "remediation": "Enable default encryption"
+      }
+    },
+    {
+      "event_id": "SEC-EVT-2024-008",
+      "timestamp": "2024-01-15T18:45:00Z",
+      "event_type": "compliance_breach",
+      "severity": "high",
+      "framework": "PCI-DSS",
+      "control_id": "2.1",
+      "control_name": "Default Credentials",
+      "status": "non_compliant",
+      "details": {
+        "asset_count": 5,
+        "affected_systems": ["db-server-01", "cache-server-02"],
+        "deadline": "2024-02-15"
+      }
+    }
+  ],
+  "attack_campaigns": [
+    {
+      "campaign_id": "CAMP-2024-001",
+      "campaign_name": "Credential Stuffing Wave",
+      "start_date": "2024-01-10",
+      "end_date": "2024-01-15",
+      "attack_vector": "brute_force",
+      "impact_level": "high",
+      "targets": ["login_api", "admin_panel"],
+      "mitre_techniques": ["T1110", "T1187"],
+      "status": "ongoing",
+      "statistics": {
+        "total_attempts": 45000,
+        "successful_compromises": 2,
+        "blocked_attempts": 44998
+      }
+    },
+    {
+      "campaign_id": "CAMP-2024-002",
+      "campaign_name": "SQL Injection Exploitation",
+      "start_date": "2024-01-12",
+      "end_date": "2024-01-15",
+      "attack_vector": "injection",
+      "impact_level": "critical",
+      "targets": ["search_api", "filter_api"],
+      "mitre_techniques": ["T1190"],
+      "status": "active",
+      "statistics": {
+        "total_attempts": 12000,
+        "successful_exploits": 0,
+        "waf_blocks": 11998
+      }
+    },
+    {
+      "campaign_id": "CAMP-2024-003",
+      "campaign_name": "Data Exfiltration Attempt",
+      "start_date": "2024-01-14",
+      "end_date": "2024-01-15",
+      "attack_vector": "data_theft",
+      "impact_level": "critical",
+      "targets": ["database", "file_storage"],
+      "mitre_techniques": ["T1020", "T1041"],
+      "status": "contained",
+      "statistics": {
+        "data_targeted": "customer_records",
+        "records_at_risk": 15000,
+        "prevented_exfiltration": "2.5 GB"
+      }
+    }
+  ],
+  "vulnerability_feed": [
+    {
+      "cve_id": "CVE-2024-1234",
+      "published_date": "2024-01-10",
+      "discovered_in_environment": "2024-01-14",
+      "cvss_v3_score": 9.8,
+      "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "vulnerability_type": "Remote Code Execution",
+      "affected_component": "authentication_module",
+      "affected_versions": ["1.0.0", "1.0.1"],
+      "public_exploit": true,
+      "exploitation_status": "active",
+      "remediation": "Update to version 1.0.2"
+    },
+    {
+      "cve_id": "CVE-2024-5678",
+      "published_date": "2024-01-11",
+      "discovered_in_environment": "2024-01-13",
+      "cvss_v3_score": 8.6,
+      "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:L",
+      "vulnerability_type": "SQL Injection",
+      "affected_component": "search_api",
+      "affected_versions": ["2.1.0"],
+      "public_exploit": true,
+      "exploitation_status": "proof_of_concept",
+      "remediation": "Implement parameterized queries"
+    },
+    {
+      "cve_id": "CVE-2024-9012",
+      "published_date": "2024-01-12",
+      "discovered_in_environment": "2024-01-14",
+      "cvss_v3_score": 7.5,
+      "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+      "vulnerability_type": "Cross-Site Scripting (XSS)",
+      "affected_component": "user_profile",
+      "affected_versions": ["1.5.0", "1.5.1"],
+      "public_exploit": false,
+      "exploitation_status": "unproven",
+      "remediation": "Input validation and output encoding"
+    }
+  ],
+  "threat_intelligence": {
+    "threat_actors": [
+      {
+        "actor_id": "ACTOR-001",
+        "name": "Phantom Hackers",
+        "attributed_attacks": ["CAMP-2024-001", "CAMP-2024-002"],
+        "known_techniques": ["T1110", "T1190", "T1566"],
+        "activity_level": "high",
+        "last_seen": "2024-01-15",
+        "motivation": "financial_gain"
+      },
+      {
+        "actor_id": "ACTOR-002",
+        "name": "Data Extraction Group",
+        "attributed_attacks": ["CAMP-2024-003"],
+        "known_techniques": ["T1020", "T1041", "T1048"],
+        "activity_level": "medium",
+        "last_seen": "2024-01-15",
+        "motivation": "espionage"
+      }
+    ],
+    "malware_families": [
+      {
+        "malware_id": "MALW-001",
+        "family": "Trojan.Generic.001",
+        "variant": "v2.3.1",
+        "hash": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+        "behavior": ["privilege_escalation", "persistence", "data_exfiltration"],
+        "first_seen": "2023-06-15",
+        "samples_detected": 3
+      }
+    ]
+  }
+}

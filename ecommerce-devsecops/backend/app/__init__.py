@@ -9,7 +9,7 @@ import logging
 from dotenv import load_dotenv
 
 # Import routes and middleware
-from app.routes import auth_routes, product_routes, order_routes, user_routes
+from app.routes import auth_routes, product_routes, order_routes, user_routes, soc_api
 from app.middleware.security import SecurityMiddleware
 from app.middleware.logging import setup_logging
 from app.utils.error_handlers import register_error_handlers
@@ -86,6 +86,7 @@ app.register_blueprint(auth_routes.bp)
 app.register_blueprint(product_routes.bp)
 app.register_blueprint(order_routes.bp)
 app.register_blueprint(user_routes.bp)
+app.register_blueprint(soc_api.soc_api)
 
 # Health Check Endpoint
 @app.route('/health', methods=['GET'])

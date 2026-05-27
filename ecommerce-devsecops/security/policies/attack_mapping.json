@@ -1,0 +1,186 @@
+{
+  "attack_mappings": {
+    "campaigns": [
+      {
+        "campaign_id": "CAMP-2024-001",
+        "campaign_name": "Credential Stuffing Wave",
+        "mitre_chain": [
+          {
+            "tactic": "reconnaissance",
+            "techniques": ["T1592", "T1589"],
+            "description": "Gather victim account information"
+          },
+          {
+            "tactic": "initial_access",
+            "techniques": ["T1566"],
+            "description": "Phishing for credentials"
+          },
+          {
+            "tactic": "credential_access",
+            "techniques": ["T1110", "T1187"],
+            "description": "Brute force attack and forced authentication"
+          },
+          {
+            "tactic": "persistence",
+            "techniques": ["T1098"],
+            "description": "Account manipulation"
+          }
+        ],
+        "kill_chain": "Reconnaissance -> Initial Access -> Credential Access -> Persistence",
+        "risk_level": "HIGH"
+      },
+      {
+        "campaign_id": "CAMP-2024-002",
+        "campaign_name": "SQL Injection Exploitation",
+        "mitre_chain": [
+          {
+            "tactic": "initial_access",
+            "techniques": ["T1190"],
+            "description": "Exploit public-facing application"
+          },
+          {
+            "tactic": "execution",
+            "techniques": ["T1059"],
+            "description": "Command execution via SQL"
+          },
+          {
+            "tactic": "discovery",
+            "techniques": ["T1087"],
+            "description": "Account and database discovery"
+          },
+          {
+            "tactic": "collection",
+            "techniques": ["T1530"],
+            "description": "Data from cloud storage"
+          }
+        ],
+        "kill_chain": "Initial Access -> Execution -> Discovery -> Collection",
+        "risk_level": "CRITICAL"
+      },
+      {
+        "campaign_id": "CAMP-2024-003",
+        "campaign_name": "Data Exfiltration Attempt",
+        "mitre_chain": [
+          {
+            "tactic": "persistence",
+            "techniques": ["T1547"],
+            "description": "Boot or logon autostart execution"
+          },
+          {
+            "tactic": "privilege_escalation",
+            "techniques": ["T1548"],
+            "description": "Abuse elevation control mechanism"
+          },
+          {
+            "tactic": "lateral_movement",
+            "techniques": ["T1021"],
+            "description": "Remote services"
+          },
+          {
+            "tactic": "collection",
+            "techniques": ["T1115"],
+            "description": "Clipboard data"
+          },
+          {
+            "tactic": "exfiltration",
+            "techniques": ["T1020", "T1041"],
+            "description": "Exfiltration over C2 channel"
+          }
+        ],
+        "kill_chain": "Persistence -> Privilege Escalation -> Lateral Movement -> Collection -> Exfiltration",
+        "risk_level": "CRITICAL"
+      }
+    ],
+    "vulnerabilities_mapped": [
+      {
+        "cve_id": "CVE-2024-1234",
+        "vulnerability_name": "Remote Code Execution in Auth Module",
+        "mitre_techniques": {
+          "T1190": {
+            "tactic": "initial_access",
+            "description": "Exploit public-facing application"
+          },
+          "T1203": {
+            "tactic": "execution",
+            "description": "Exploitation for client execution"
+          }
+        },
+        "attack_scenarios": [
+          {
+            "scenario": "Remote Code Execution Attack Chain",
+            "steps": [
+              "Identify auth endpoint",
+              "Craft malicious payload",
+              "Execute arbitrary code",
+              "Establish persistence",
+              "Lateral movement to database"
+            ]
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2024-5678",
+        "vulnerability_name": "SQL Injection in Search API",
+        "mitre_techniques": {
+          "T1190": {
+            "tactic": "initial_access",
+            "description": "Exploit public-facing application"
+          },
+          "T1087": {
+            "tactic": "discovery",
+            "description": "Account discovery via SQL queries"
+          }
+        },
+        "attack_scenarios": [
+          {
+            "scenario": "Data Extraction via SQL Injection",
+            "steps": [
+              "Fuzz search endpoint",
+              "Identify injection point",
+              "Extract database metadata",
+              "Query sensitive tables",
+              "Exfiltrate data"
+            ]
+          }
+        ]
+      }
+    ],
+    "tactic_statistics": {
+      "reconnaissance": {
+        "detected_count": 12,
+        "severity": "low",
+        "prevalence": "very_high"
+      },
+      "initial_access": {
+        "detected_count": 8,
+        "severity": "critical",
+        "prevalence": "high"
+      },
+      "credential_access": {
+        "detected_count": 45000,
+        "severity": "high",
+        "prevalence": "very_high"
+      },
+      "discovery": {
+        "detected_count": 23,
+        "severity": "medium",
+        "prevalence": "high"
+      },
+      "lateral_movement": {
+        "detected_count": 2,
+        "severity": "critical",
+        "prevalence": "medium"
+      },
+      "exfiltration": {
+        "detected_count": 1,
+        "severity": "critical",
+        "prevalence": "low_but_high_impact"
+      },
+      "impact": {
+        "detected_count": 0,
+        "severity": "critical",
+        "prevalence": "prevented"
+      }
+    }
+  }
+}
